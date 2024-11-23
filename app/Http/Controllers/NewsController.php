@@ -8,6 +8,10 @@ class NewsController extends Controller
 {
     public function index(){
         $news = \App\Models\News::all();
-        return 
+        return response()->json(['success'=> true, 'data' => $news]);
+    }
+
+    public function store(Request $request){
+        
     }
 }
