@@ -62,20 +62,22 @@ class NewsController extends Controller{
     }
 
     public function restrictions(Request $request, $id){
-        $validated = $request->validate([
-            'restricted_pages'=> 'required|array',
-        ]);
+         $validated = $request->validate([
+        'restricted_pages' => 'required|array', // Ensure the input is an array
+        'restricted_pages.*' => 'string',       // Each item in the array must be a string
+    ]);
 
         $news = \App\Models\News::findOrFail($id);
-    }
+    
 
     $news->update([
-        'restricted_pages' => $validated['restricted_pages']
+        'restricted_pages' => $validated['restricted_pages'],
     ]);
 
     return response()->json([
         'success' => true,
         'message' => 'News restrictions updated successfully!',
         'data' => $news,
-    ]);
+        ]);
+    }
 }
