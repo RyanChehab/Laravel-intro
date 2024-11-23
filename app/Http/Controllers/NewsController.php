@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class NewsController extends Controller
-{
+class NewsController extends Controller{
     public function index(){
         $news = \App\Models\News::all();
         return response()->json(['success'=> true, 'data' => $news]);
@@ -48,4 +47,17 @@ class NewsController extends Controller
         'data' => $news,
     ]);
 
+    }
+
+    public function remove($id){
+
+        $news = \App\Models\News::findOrFail($id);
+
+        $news->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'News deleted successfully!',
+        ]);
+    }
 }
