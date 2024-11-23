@@ -12,7 +12,10 @@ class News extends Model{
         'title',
         'content',
         'used_id',
-    ]
-
+    ];
+    
+    public function user(){
+        return $this->belongsTo(user::class);
+    }
     
 }
