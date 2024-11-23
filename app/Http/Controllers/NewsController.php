@@ -36,5 +36,16 @@ class NewsController extends Controller
 
     // search for the article if found, if not respond with 404 error
     $news = \App\Models\News::findOrFail($id);
-    
+
+    $news->update([
+        'title'=> $validated['title'],
+        'content' => $validated['content'],
+    ]);
+
+    return respone()->json([
+        'success' => true,
+        'message' => 'News updated successfully!',
+        'data' => $news,
+    ]);
+
 }
