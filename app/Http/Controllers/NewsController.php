@@ -26,4 +26,15 @@ class NewsController extends Controller
 
         return response()->json(['success' => true, 'message' => 'News created successfully!', 'data' => $news]);
     }
+
+    public function update(Request $request, $id){
+    
+    $validated = $request->validate([
+        'title' => 'required|string|max:255', 
+        'content' => 'required|string',      
+    ]);
+
+    // search for the article if found, if not respond with 404 error
+    $news = \App\Models\News::findOrFail($id);
+    
 }
