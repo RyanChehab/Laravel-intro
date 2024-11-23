@@ -60,4 +60,22 @@ class NewsController extends Controller{
             'message' => 'News deleted successfully!',
         ]);
     }
+
+    public function restrictions(Request $request, $id){
+        $validated = $request->validate([
+            'restricted_pages'=> 'required|array',
+        ]);
+
+        $news = \App\Models\News::findOrFail($id);
+    }
+
+    $news->update([
+        'restricted_pages' => $validated['restricted_pages']
+    ]);
+
+    return response()->json([
+        'success' => true,
+        'message' => 'News restrictions updated successfully!',
+        'data' => $news,
+    ]);
 }
