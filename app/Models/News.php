@@ -11,7 +11,12 @@ class News extends Model{
     protected $fillable = [
         'title',
         'content',
-        'used_id',
+        'user_id',
+        'restricted_pages',
+    ];
+
+    protected $casts = [
+        'restricted_pages' => 'array',
     ];
     
     public function user(){
