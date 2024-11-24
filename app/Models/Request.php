@@ -13,5 +13,7 @@ class Request extends Model
         'text',
     ];
 
-    public fun
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }
