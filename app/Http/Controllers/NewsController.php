@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace app\Http\Controllers;
 
 use Illuminate\Http\Request;
+use app\Models\News; 
 
 class NewsController extends Controller{
+    
     public function index(){
         $news = \App\Models\News::all();
         return response()->json(['success'=> true, 'data' => $news]);
@@ -63,8 +65,8 @@ class NewsController extends Controller{
 
     public function restrictions(Request $request, $id){
          $validated = $request->validate([
-        'restricted_pages' => 'required|array', // Ensure the input is an array
-        'restricted_pages.*' => 'string',       // Each item in the array must be a string
+        'restricted_pages' => 'required|array', 
+        'restricted_pages.*' => 'string',       
     ]);
 
         $news = \App\Models\News::findOrFail($id);
